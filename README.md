@@ -1,5 +1,8 @@
 # PixiTales-ScriptableObject-Inventory
 
-Inspired by Inscope Inventory system. Remade inventory into an ScriptableObject and optimization.
+Special thanks with the help of:
+Inscope
+Coding with unity
+and Ashfid on Discord
 
 These are my own sprites that I made, do not steal!!!
