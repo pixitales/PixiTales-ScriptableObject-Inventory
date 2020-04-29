@@ -1,0 +1,1 @@
+# PixiTales-ScriptableObject-Inventory
