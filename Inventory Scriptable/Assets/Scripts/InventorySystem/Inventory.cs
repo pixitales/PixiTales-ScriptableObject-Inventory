@@ -30,6 +30,22 @@ public class Inventory : ScriptableObject
         return itemDatabase.MyItems[ID - 1];
     }
 
+    public bool HasItem(Item item)
+    {
+        for (int i = 0; i < slot.Length; i++)
+        {
+            if (!slot[i].IsEmpty)
+            {
+                if (slot[i].MyItem == item)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void ClearSlots()
     {
         slot = new Slot[25];

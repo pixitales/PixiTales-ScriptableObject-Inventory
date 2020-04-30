@@ -39,12 +39,6 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
         get { return slotIndex; }
     }
 
-    public Image MySlotHighlight //Unused at the moment
-    {
-        get { return slotHighlight; }
-        set { slotHighlight = value; }
-    }
-
     public void Initialize(int slotIndex, Slot slot, InventoryManager inventoryManager)
     {
         this.slotIndex = slotIndex;
