@@ -7,7 +7,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private bool debugMode;
 
-    private Dictionary<SlotManager, Slot> slotDictionary = new Dictionary<SlotManager, Slot>();
+    private Dictionary<SlotManager, Slot> slotDictionary;
     public Dictionary<SlotManager, Slot> MySlotDictionary
     {
         get { return slotDictionary; }
@@ -36,7 +36,6 @@ public class InventoryManager : MonoBehaviour
     public bool DebugMode
     {
         get { return debugMode; }
-        private set { debugMode = value; }
     }
 
     private SlotManager[] slotManager;
@@ -125,8 +124,16 @@ public class InventoryManager : MonoBehaviour
     {
         Slot[] getSlots = inventory.MySlot;
 
-        inventory.MySlot = inventory.MySlot.OrderByDescending(o => o.MyItemID).ToArray();
+        inventory.MySlot = getSlots
+            .OrderByDescending(o => o.MyItemID)
+            .ThenByDescending(o => o.MyStackCount)
+            .ToArray();
 
+        UpdateInventory();
+    }
+
+    private void UpdateInventory()
+    {
         // Reassign slot ID
         AddSlots();
 

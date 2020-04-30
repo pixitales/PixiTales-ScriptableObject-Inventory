@@ -31,7 +31,6 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
     public Slot MySlot
     {
         get { return slot; }
-        set { slot = value; }
     }
 
     private int slotIndex;
@@ -139,7 +138,6 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
 
     public void AddItem(Item item, int amount)
     {
-        item.MySlot = this;
         slot.AddItem(item);
         slot.AddAmount(amount);
 
@@ -231,14 +229,14 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
         if (slot.MyStackCount > 1)
         {
             icon.color = Color.white;
-            icon.sprite = MySlot.MyItem.MyIcon;
+            icon.sprite = slot.MyItem.MyIcon;
             stackCount.text = slot.MyStackCount.ToString();
             slot.MyItemID = slot.MyItem.MyID;
         }
         else if (slot.MyStackCount == 1)
         {
             icon.color = Color.white;
-            icon.sprite = MySlot.MyItem.MyIcon;
+            icon.sprite = slot.MyItem.MyIcon;
             stackCount.text = string.Empty;
             slot.MyItemID = slot.MyItem.MyID;
         }

@@ -78,10 +78,10 @@ public class HandScript : MonoBehaviour
         {
             Item item = (Item)MyMoveable;
 
-            if (item.MySlot != null)
-            {
-                //item.MySlot.Clear();
-            }
+            //if (item.MySlot != null)
+            //{
+            //    //item.MySlot.Clear();
+            //}
         }
 
         Drop();

@@ -33,16 +33,4 @@ public abstract class Item : ScriptableObject, IMoveable
     {
         get { return stackSize; }
     }
-
-    private SlotManager slot;
-    public SlotManager MySlot
-    {
-        get { return slot; }
-        set { slot = value; }
-    }
-
-    public void RemoveItem()
-    {
-        MySlot.RemoveItem(1);
-    }
 }

@@ -93,7 +93,6 @@ public class SaveManager : MonoBehaviour
 
             if (itemID >= 1)
             {
-                Debug.Log(itemID);
                 playerInventory.MySlot[i].MyItem = playerInventory.GetItemDatabase(itemID);
                 playerInventory.MySlot[i].MyItemID = itemID;
                 playerInventory.MySlot[i].MyStackCount = stackCount;
