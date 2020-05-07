@@ -13,55 +13,67 @@ public class SaveManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("Saved");
             Save();
         }
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Debug.Log("Loaded");
             Load();
         }
     }
 
     public void Save()
     {
+        Debug.Log("Saved");
+
+        FileStream file = File.Open(Application.persistentDataPath + "/" + savePath + ".dat", FileMode.Create);
+
         try
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/" + savePath + ".dat", FileMode.Create);
             SaveData data = new SaveData();
 
             SaveInventory(data);
 
             bf.Serialize(file, data);
-            file.Close();
         }
 
         catch (System.Exception)
         {
+            Debug.Log("Failed to save");
+        }
 
+        finally
+        {
+            file.Close();
         }
     }
 
     public void Load()
     {
-        try
+        Debug.Log("Loaded");
+
+        FileStream file = File.Open(Application.persistentDataPath + "/" + savePath + ".dat", FileMode.Open);
+
+        if (HasAnySaveFile())
         {
-            if (HasAnySaveFile())
+            try
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(Application.persistentDataPath + "/" + savePath + ".dat", FileMode.Open);
                 SaveData data = (SaveData)bf.Deserialize(file);
-                file.Close();
 
                 LoadInventory(data);
             }
-        }
 
-        catch (System.Exception)
-        {
+            catch (System.Exception)
+            {
+                Debug.Log("Failed to load");
+            }
 
+            finally
+            {
+                file.Close();
+            }
         }
     }
 
@@ -72,7 +84,7 @@ public class SaveManager : MonoBehaviour
 
     private void SaveInventory(SaveData data)
     {
-        Slot[] getSlots = playerInventory.MySlot; 
+        Slot[] getSlots = playerInventory.MySlot;
 
         for (int i = 0; i < getSlots.Length; i++)
         {

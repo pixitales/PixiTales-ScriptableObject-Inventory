@@ -473,7 +473,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 7350699243554409617}
   stackCount: {fileID: 2700910564240581007}
-  slotHighlight: {fileID: 6581778308210171099}
 --- !u!114 &4246041219159323852
 MonoBehaviour:
   m_ObjectHideFlags: 0

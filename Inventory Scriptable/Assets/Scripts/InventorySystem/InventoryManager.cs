@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
+    [SerializeField] private HandScript handScript;
     [SerializeField] private bool debugMode;
 
     private Dictionary<SlotManager, Slot> slotDictionary;
@@ -31,6 +32,12 @@ public class InventoryManager : MonoBehaviour
                 fromSlot.MyIcon.color = Color.grey;
             }
         }
+    }
+
+    public HandScript MyHandScript
+    {
+        get { return handScript; }
+        set { handScript = value; }
     }
 
     public bool DebugMode

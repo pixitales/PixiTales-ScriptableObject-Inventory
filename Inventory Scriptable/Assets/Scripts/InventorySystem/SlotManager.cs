@@ -11,7 +11,6 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI stackCount;
-    [SerializeField] private Image slotHighlight;
 
     private InventoryManager inventoryManager;
 
@@ -54,7 +53,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
         {
             if (inventoryManager.FromSlot == null && !slot.IsEmpty)
             {
-                HandScript.MyInstance.TakeMoveable(slot.MyItem as IMoveable);
+                inventoryManager.MyHandScript.TakeMoveable(slot.MyItem as IMoveable);
 
                 inventoryManager.FromSlot = this;
             }
@@ -62,7 +61,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
             {
                 if (PutItemBack() || MergeItems(inventoryManager.FromSlot) || SwapItems(inventoryManager.FromSlot) || AddItem(inventoryManager.FromSlot))
                 {
-                    HandScript.MyInstance.Drop();
+                    inventoryManager.MyHandScript.Drop();
 
                     inventoryManager.FromSlot = null;
                 }

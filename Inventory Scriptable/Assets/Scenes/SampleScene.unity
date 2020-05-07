@@ -4477,6 +4477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 6dda2508fe79470459df6bf09bdf9b2d, type: 2}
+  handScript: {fileID: 6873555436828843191}
   debugMode: 0
 --- !u!114 &6873555438742943789
 MonoBehaviour:
