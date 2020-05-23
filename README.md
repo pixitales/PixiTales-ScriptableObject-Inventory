@@ -1,6 +1,6 @@
 # PixiTales-ScriptableObject-Inventory
 
-Can swap, merge, stack, or use items. Can save/load and sort items. Doesn't delete your inventory when you change scenes.
+Can swap, merge, stack, or use items. Drag items to the trashcan to delete. Can save/load and sort items. Doesn't delete your inventory when you change scenes.
 
 Special thanks to Inscope, Coding with unity, and Ashfid on Discord
 
