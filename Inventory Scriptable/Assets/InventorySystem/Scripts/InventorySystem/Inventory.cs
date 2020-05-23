@@ -4,11 +4,19 @@
 public class Inventory : ScriptableObject
 {
     [SerializeField] private ItemDatabase itemDatabase;
+    [SerializeField] private int slotAmount = 25;
     [SerializeField] private Slot[] slot = new Slot[25];
 
     public ItemDatabase MyItemDatabase
     {
         get { return itemDatabase; }
+        set { itemDatabase = value; }
+    }
+
+    public int MySlotAmount
+    {
+        get { return slotAmount; }
+        set { slotAmount = value; }
     }
 
     public Slot[] MySlot
@@ -46,8 +54,21 @@ public class Inventory : ScriptableObject
         return false;
     }
 
+    public int EmptySlotCount()
+    {
+        int count = 0;
+
+        for (int i = 0; i < slot.Length; i++)
+        {
+            if (slot[i].IsEmpty)
+                count++;
+        }
+
+        return count;
+    }
+
     public void ClearSlots()
     {
-        slot = new Slot[25];
+        slot = new Slot[slotAmount];
     }
 }

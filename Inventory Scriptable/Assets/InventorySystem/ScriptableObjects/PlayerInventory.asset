@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   itemDatabase: {fileID: 11400000, guid: 3e4cef9869f7f02488244c139d7db049, type: 2}
+  slotAmount: 25
   slot:
   - item: {fileID: 0}
     ID: 0

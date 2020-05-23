@@ -2,10 +2,17 @@
 using System.Linq;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public enum ItemType { ManaPotionL, HealthPotionL }
+
+public class InventoryManager : Singleton<InventoryManager>
 {
+    [Header("References")]
     [SerializeField] private Inventory inventory;
+    //[SerializeField] private EquipmentManager equipmentManager;
     [SerializeField] private HandScript handScript;
+    //[SerializeField] private BoolEvent onPauseEvent;
+
+    [Header("Debugging Tools")]
     [SerializeField] private bool debugMode;
 
     private Dictionary<SlotManager, Slot> slotDictionary;
@@ -34,6 +41,11 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public Inventory MyInventory
+    {
+        get { return inventory; }
+    }
+
     public HandScript MyHandScript
     {
         get { return handScript; }
@@ -57,6 +69,10 @@ public class InventoryManager : MonoBehaviour
         AddSlots();
     }
 
+    //public void OnEnable() => onPauseEvent?.RegisterListener(OnPause);
+
+    //private void OnDisable() => onPauseEvent?.UnregisterListener(OnPause);
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -76,7 +92,7 @@ public class InventoryManager : MonoBehaviour
 
         SlotManager[] getSlots = GetComponentsInChildren<SlotManager>();
 
-        if (getSlots != null)
+        if (inventory.MySlot.Length > 0 && getSlots != null)
         {
             for (int i = 0; i < getSlots.Length; i++)
             {
@@ -90,6 +106,19 @@ public class InventoryManager : MonoBehaviour
         }
 
         inventory.AutoAssignSlotID();
+    }
+
+    public void AddItemType(ItemType itemType) // For Debugging
+    {
+        switch (itemType)
+        {
+            case ItemType.ManaPotionL:
+                AddItem(inventory.MyItemDatabase.MyItems[0], 1);
+                break;
+            case ItemType.HealthPotionL:
+                AddItem(inventory.MyItemDatabase.MyItems[1], 1);
+                break;
+        }
     }
 
     public void AddItem(Item item, int amount)
@@ -150,8 +179,19 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    private void OnPause(bool pause)
+    {
+        if (!pause && handScript.MyMoveable != null)
+        {
+            SlotManager fromSlot = FromSlot;
+
+            handScript.Drop();
+            fromSlot.MyIcon.color = Color.white;
+        }
+    }
+
     private void OnApplicationQuit()
     {
-        inventory.MySlot = new Slot[25];
+        inventory.MySlot = new Slot[inventory.MySlotAmount];
     }
 }

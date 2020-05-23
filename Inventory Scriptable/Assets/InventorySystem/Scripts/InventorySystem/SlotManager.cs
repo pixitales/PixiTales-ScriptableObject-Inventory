@@ -120,7 +120,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
                 }
 
                 AddItem(tmpItem, 1);
-                from.ClearAllItems();
+                from.ClearItems();
             }
 
             return true;
@@ -147,7 +147,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
         UpdateSlot();
     }
 
-    public void ClearAllItems()
+    public void ClearItems()
     {
         slot.MyStackCount = 0;
         UpdateSlot();

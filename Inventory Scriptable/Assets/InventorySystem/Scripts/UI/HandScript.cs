@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class HandScript : MonoBehaviour
+public class HandScript : Singleton<HandScript>
 {
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private Image icon;
