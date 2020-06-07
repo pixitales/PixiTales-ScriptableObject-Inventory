@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
@@ -14,6 +15,12 @@ public class HandScript : Singleton<HandScript>
     {
         //Makes sure that the icon follows the hand
         icon.transform.position = Input.mousePosition + offset;
+
+        // Deletes item if drag and drop item outside the menu
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject() && MyMoveable != null)
+        {
+            DeleteItem();
+        }
     }
 
     /// <summary>
@@ -39,6 +46,18 @@ public class HandScript : Singleton<HandScript>
     {
         MyMoveable = null;
         icon.color = new Color(0, 0, 0, 0);
+        inventoryManager.FromSlot = null;
+    }
+
+    public void DeleteItem()
+    {
+        if (MyMoveable is Item)
+        {
+            inventoryManager.FromSlot.ClearItems();
+        }
+
+        Drop();
+
         inventoryManager.FromSlot = null;
     }
 }

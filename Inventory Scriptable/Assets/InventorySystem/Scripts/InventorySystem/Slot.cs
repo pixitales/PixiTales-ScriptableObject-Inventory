@@ -63,4 +63,11 @@ public class Slot
     {
         this.stackCount += amount;
     }
+
+    public void Clear()
+    {
+        item = null;
+        stackCount = 0;
+        ID = 0;
+    }
 }

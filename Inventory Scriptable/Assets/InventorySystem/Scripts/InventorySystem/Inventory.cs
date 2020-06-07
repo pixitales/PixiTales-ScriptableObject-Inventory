@@ -67,8 +67,11 @@ public class Inventory : ScriptableObject
         return count;
     }
 
-    public void ClearSlots()
+    public void ClearAllSlots()
     {
-        slot = new Slot[slotAmount];
+        for (int i = 0; i < slot.Length; i++)
+        {
+            slot[i].Clear();
+        }
     }
 }

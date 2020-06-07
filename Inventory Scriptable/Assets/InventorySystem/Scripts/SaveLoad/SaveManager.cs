@@ -94,20 +94,26 @@ public class SaveManager : MonoBehaviour
 
     private void LoadInventory(SaveData data)
     {
+        //playerInventory.ClearAllSlots();
+
         SlotManager[] getSlots = inventoryManager.GetComponentsInChildren<SlotManager>();
+
         var getItems = data.MyInventoryData.MyItems;
+        var getInventory = inventoryManager.MyInventory;
 
         for (int i = 0; i < getItems.Count; i++)
         {
+            getSlots[i].MySlot.Clear();
+
             int itemID = getItems[i].MyID;
             int stackCount = getItems[i].MyStackCount;
             int slotIndex = getItems[i].MySlotIndex;
 
             if (itemID >= 1)
             {
-                playerInventory.MySlot[i].MyItem = playerInventory.GetItemDatabase(itemID);
-                playerInventory.MySlot[i].MyItemID = itemID;
-                playerInventory.MySlot[i].MyStackCount = stackCount;
+                getInventory.MySlot[i].MyItem = getInventory.GetItemDatabase(itemID);
+                getInventory.MySlot[i].MyItemID = itemID;
+                getInventory.MySlot[i].MyStackCount = stackCount;
             }
 
             getSlots[i].UpdateSlot();

@@ -179,9 +179,9 @@ public class InventoryManager : Singleton<InventoryManager>
         }
     }
 
-    private void OnPause(bool pause)
+    public void OnResume()
     {
-        if (!pause && handScript.MyMoveable != null)
+        if (handScript.MyMoveable != null)
         {
             SlotManager fromSlot = FromSlot;
 
