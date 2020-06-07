@@ -158,6 +158,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void SortItems()
     {
+        HandScript.MyInstance.Drop();
+
         Slot[] getSlots = inventory.MySlot;
 
         inventory.MySlot = getSlots
