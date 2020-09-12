@@ -2,10 +2,10 @@
 
 public abstract class Item : ScriptableObject, IMoveable
 {
-    [SerializeField] private int ID;
-    [SerializeField] private Sprite icon;
-    [SerializeField] private int stackSize;
-    [SerializeField] [TextArea(2, 5)] private string description;
+    [SerializeField] private int ID = 0;
+    [SerializeField] private Sprite icon = null;
+    [SerializeField] private int stackSize = 0;
+    [SerializeField] [TextArea(2, 5)] private string description = "";
 
     public int MyID
     {

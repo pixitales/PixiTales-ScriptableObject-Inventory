@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup pauseMenu;
+    [SerializeField] private CanvasGroup pauseMenu = null;
 
     public UnityEvent onPauseEvent;
     public UnityEvent onResumeEvent;

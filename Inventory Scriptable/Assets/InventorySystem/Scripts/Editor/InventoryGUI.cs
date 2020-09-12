@@ -4,38 +4,38 @@ using UnityEngine;
 [CustomEditor(typeof(Inventory))]
 public class InventoryGUI : Editor
 {
-    private Inventory inventory;
-    private bool[] showItem;
+    private Inventory _inventory;
+    private bool[] _showItem;
 
     public override void OnInspectorGUI()
     {
-        if (inventory == null)
+        if (_inventory == null)
         {
-            inventory = (Inventory)target;
-            showItem = new bool[inventory.MySlotAmount];
+            _inventory = (Inventory)target;
+            _showItem = new bool[_inventory.MySlotAmount];
         }
 
-        inventory.MyItemDatabase = (ItemDatabase)EditorGUILayout.ObjectField("Item Database: ", inventory.MyItemDatabase, typeof(Object), false);
-        inventory.MySlotAmount = EditorGUILayout.IntField("Slot Amount", inventory.MySlotAmount);
+        _inventory.MyItemDatabase = (ItemDatabase)EditorGUILayout.ObjectField("Item Database: ", _inventory.MyItemDatabase, typeof(Object), false);
+        _inventory.MySlotAmount = EditorGUILayout.IntField("Slot Amount", _inventory.MySlotAmount);
 
         EditorGUIUtility.labelWidth = 80;
         EditorGUIUtility.fieldWidth = 60;
 
-        for (int i = 0; i < inventory.MySlot.Length; i++)
+        for (int i = 0; i < _inventory.MySlot.Length; i++)
         {
-            if (inventory.MySlot[i].MyItem != null)
+            if (_inventory.MySlot[i].MyItem != null)
             {
-                showItem[i] = EditorGUILayout.BeginFoldoutHeaderGroup(showItem[i], "Item slot " + i + " - " + inventory.MySlot[i].MyItem.name);
+                _showItem[i] = EditorGUILayout.BeginFoldoutHeaderGroup(_showItem[i], "Item slot " + i + " - " + _inventory.MySlot[i].MyItem.name);
 
-                if (showItem[i])
+                if (_showItem[i])
                 {
                     EditorGUILayout.BeginVertical("box");
 
-                    inventory.MySlot[i].MyItem = (Item)EditorGUILayout.ObjectField("Item", inventory.MySlot[i].MyItem, typeof(Object), false);
+                    _inventory.MySlot[i].MyItem = (Item)EditorGUILayout.ObjectField("Item", _inventory.MySlot[i].MyItem, typeof(Object), false);
 
                     EditorGUILayout.BeginHorizontal();
-                    inventory.MySlot[i].MyItemID =  EditorGUILayout.IntField("ID", inventory.MySlot[i].MyItem.MyID);
-                    inventory.MySlot[i].MyStackCount = EditorGUILayout.IntField("StackCount", inventory.MySlot[i].MyStackCount);
+                    _inventory.MySlot[i].MyItemID =  EditorGUILayout.IntField("ID", _inventory.MySlot[i].MyItem.MyID);
+                    _inventory.MySlot[i].MyStackCount = EditorGUILayout.IntField("StackCount", _inventory.MySlot[i].MyStackCount);
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.EndVertical();
@@ -50,6 +50,6 @@ public class InventoryGUI : Editor
         }
 
         if (GUI.changed)
-            EditorUtility.SetDirty(inventory);
+            EditorUtility.SetDirty(_inventory);
     }
 }

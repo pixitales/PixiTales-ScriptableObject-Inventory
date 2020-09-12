@@ -6,8 +6,8 @@ public class SaveManager : MonoBehaviour
 {
     [SerializeField] private string savePath = "Inventory";
 
-    [SerializeField] private InventoryManager inventoryManager;
-    [SerializeField] private Inventory playerInventory;
+    [SerializeField] private InventoryManager inventoryManager = null;
+    [SerializeField] private Inventory playerInventory = null;
 
     private void Update()
     {

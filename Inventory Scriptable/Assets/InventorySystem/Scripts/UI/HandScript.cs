@@ -5,16 +5,28 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class HandScript : Singleton<HandScript>
 {
-    [SerializeField] private InventoryManager inventoryManager;
-    [SerializeField] private Image icon;
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private InventoryManager inventoryManager = null;
+    [SerializeField] private Vector3 offset = new Vector3(40, 10, 0);
 
+    private Image _icon;
     public IMoveable MyMoveable { get; set; }
+
+    private void Awake()
+    {
+        _icon = GetComponent<Image>();
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        _icon.color = new Color(0, 0, 0, 0);
+        _icon.raycastTarget = false;
+    }
 
     private void Update()
     {
         //Makes sure that the icon follows the hand
-        icon.transform.position = Input.mousePosition + offset;
+        _icon.transform.position = Input.mousePosition + offset;
 
         // Deletes item if drag and drop item outside the menu
         if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject() && MyMoveable != null)
@@ -30,22 +42,22 @@ public class HandScript : Singleton<HandScript>
     public void TakeMoveable(IMoveable moveable)
     {
         this.MyMoveable = moveable;
-        icon.sprite = moveable.MyIcon;
-        icon.color = Color.white;
+        _icon.sprite = moveable.MyIcon;
+        _icon.color = Color.white;
     }
 
     public IMoveable Put()
     {
         IMoveable tmp = MyMoveable;
         MyMoveable = null;
-        icon.color = new Color(0, 0, 0, 0);
+        _icon.color = new Color(0, 0, 0, 0);
         return tmp;
     }
 
     public void Drop()
     {
         MyMoveable = null;
-        icon.color = new Color(0, 0, 0, 0);
+        _icon.color = new Color(0, 0, 0, 0);
         inventoryManager.FromSlot = null;
     }
 

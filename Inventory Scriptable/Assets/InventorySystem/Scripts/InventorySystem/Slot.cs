@@ -4,10 +4,10 @@ using UnityEngine;
 [Serializable]
 public class Slot
 {
-    [SerializeField] private Item item;
-    [SerializeField] private int ID;
-    [SerializeField] private int slotindex;
-    [SerializeField] private int stackCount;
+    [SerializeField] private Item item = null;
+    [SerializeField] private int ID = 0;
+    [SerializeField] private int slotindex = 0;
+    [SerializeField] private int stackCount = 0;
 
     public Item MyItem
     {

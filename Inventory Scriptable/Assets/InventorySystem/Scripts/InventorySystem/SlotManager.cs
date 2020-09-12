@@ -9,10 +9,10 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
 {
     public event OnItemChanged OnItemChangedEvent;
 
-    [SerializeField] private Image icon;
-    [SerializeField] private TextMeshProUGUI stackCount;
+    [SerializeField] private Image icon = null;
+    [SerializeField] private TextMeshProUGUI stackCount = null;
 
-    private InventoryManager inventoryManager;
+    private InventoryManager _inventoryManager;
 
     public Image MyIcon
     {
@@ -42,7 +42,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
     {
         this.slotIndex = slotIndex;
         this.slot = slot;
-        this.inventoryManager = inventoryManager;
+        this._inventoryManager = inventoryManager;
 
         //OnItemChangedEvent += new OnItemChanged(UpdateSlot);
     }
@@ -51,19 +51,19 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (inventoryManager.FromSlot == null && !slot.IsEmpty)
+            if (_inventoryManager.FromSlot == null && !slot.IsEmpty)
             {
-                inventoryManager.MyHandScript.TakeMoveable(slot.MyItem as IMoveable);
+                _inventoryManager.MyHandScript.TakeMoveable(slot.MyItem as IMoveable);
 
-                inventoryManager.FromSlot = this;
+                _inventoryManager.FromSlot = this;
             }
-            else if (inventoryManager.FromSlot != null)
+            else if (_inventoryManager.FromSlot != null)
             {
-                if (PutItemBack() || MergeItems(inventoryManager.FromSlot) || SwapItems(inventoryManager.FromSlot) || AddItem(inventoryManager.FromSlot))
+                if (PutItemBack() || MergeItems(_inventoryManager.FromSlot) || SwapItems(_inventoryManager.FromSlot) || AddItem(_inventoryManager.FromSlot))
                 {
-                    inventoryManager.MyHandScript.Drop();
+                    _inventoryManager.MyHandScript.Drop();
 
-                    inventoryManager.FromSlot = null;
+                    _inventoryManager.FromSlot = null;
                 }
             }
         }
@@ -76,9 +76,9 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
 
     private bool PutItemBack()
     {
-        if (inventoryManager.FromSlot == this)
+        if (_inventoryManager.FromSlot == this)
         {
-            inventoryManager.FromSlot.MyIcon.color = Color.white;
+            _inventoryManager.FromSlot.MyIcon.color = Color.white;
             return true;
         }
 
@@ -95,7 +95,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
             {
                 RemoveItem(1);
             }
-            else if (inventoryManager.DebugMode)
+            else if (_inventoryManager.DebugMode)
             {
                 Debug.Log("Cannot use this " + item + " right now");
             }
@@ -106,7 +106,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
     {
         if (slot.IsEmpty || from.slot.MyItem.MyID == slot.MyItem.MyID)
         {
-            if (inventoryManager.DebugMode)
+            if (_inventoryManager.DebugMode)
                 Debug.Log("Add Items");
 
             Item tmpItem = from.slot.MyItem;
@@ -162,7 +162,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
 
         if (from.slot.MyItem.MyID == slot.MyItem.MyID && !slot.IsFull)
         {
-            if (inventoryManager.DebugMode)
+            if (_inventoryManager.DebugMode)
                 Debug.Log("Merge Items");
 
             // How many free slots we have in the stack
@@ -194,7 +194,7 @@ public class SlotManager : MonoBehaviour, IPointerClickHandler
 
         if (from.slot.MyItem.MyID != slot.MyItem.MyID || from.slot.MyStackCount + slot.MyStackCount > slot.MyItem.MyStackSize)
         {
-            if (inventoryManager.DebugMode)
+            if (_inventoryManager.DebugMode)
                 Debug.Log("Swap Items");
 
             // Copy all the items we need to swap from A

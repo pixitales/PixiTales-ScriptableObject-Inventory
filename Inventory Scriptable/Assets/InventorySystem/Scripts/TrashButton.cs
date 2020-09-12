@@ -3,16 +3,17 @@ using UnityEngine.EventSystems;
 
 public class TrashButton : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private InventoryManager inventoryManager;
+    [SerializeField] private InventoryManager inventoryManager = null;
     //[SerializeField] private EquipmentManager equipmentManager;
-    [SerializeField] private HandScript handScript;
-    private Item item;
+    [SerializeField] private HandScript handScript = null;
+
+    private Item _item;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (handScript.MyMoveable is IUseable)
         {
-            this.item = (Item)handScript.MyMoveable;
+            this._item = (Item)handScript.MyMoveable;
 
             if (inventoryManager.FromSlot != null)
             {

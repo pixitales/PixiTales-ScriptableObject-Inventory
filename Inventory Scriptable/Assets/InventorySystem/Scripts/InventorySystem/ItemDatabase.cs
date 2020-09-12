@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "ItemDatabase", menuName = "InventorySystem/Items/Database")]
 public class ItemDatabase : ScriptableObject
 {
-    [SerializeField] private Item[] items;
+    [SerializeField] private Item[] items = null;
 
     public Item[] MyItems
     {

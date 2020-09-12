@@ -7,13 +7,12 @@ public enum ItemType { ManaPotionL, HealthPotionL }
 public class InventoryManager : Singleton<InventoryManager>
 {
     [Header("References")]
-    [SerializeField] private Inventory inventory;
+    [SerializeField] private Inventory inventory = null;
     //[SerializeField] private EquipmentManager equipmentManager;
-    [SerializeField] private HandScript handScript;
-    //[SerializeField] private BoolEvent onPauseEvent;
+    [SerializeField] private HandScript handScript = null;
 
     [Header("Debugging Tools")]
-    [SerializeField] private bool debugMode;
+    [SerializeField] private bool debugMode = false;
 
     private Dictionary<SlotManager, Slot> slotDictionary;
     public Dictionary<SlotManager, Slot> MySlotDictionary
@@ -68,10 +67,6 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         AddSlots();
     }
-
-    //public void OnEnable() => onPauseEvent?.RegisterListener(OnPause);
-
-    //private void OnDisable() => onPauseEvent?.UnregisterListener(OnPause);
 
     private void Update()
     {

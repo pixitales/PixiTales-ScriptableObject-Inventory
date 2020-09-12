@@ -3,7 +3,7 @@
 [CreateAssetMenu(fileName = "PlayerInventory", menuName = "InventorySystem/PlayerInventory")]
 public class Inventory : ScriptableObject
 {
-    [SerializeField] private ItemDatabase itemDatabase;
+    [SerializeField] private ItemDatabase itemDatabase = null;
     [SerializeField] private int slotAmount = 25;
     [SerializeField] private Slot[] slot = new Slot[25];
 
